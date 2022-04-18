@@ -1,0 +1,21 @@
+wmic
+# Desinstalar software windows
+product where name= “program name” call uninstall
+# Buscar o Número Serial de uma máquina
+wmic bios get serialnumber
+# Buscar Marca e modelo do computador
+wmic csproduct
+# Para facilitar a visualização e consulta podemos escrever o resultado em um TXT
+wmic csproduct >> c:\equipamentos.txt
+# Este comando busca a marca e o modelo da máquina local e escreve o resultado no arquivo equipamentos.txt localizado na unidade C.  Também podemos adicionar a opção /NODE para consultar máquinas na rede
+wmic /NODE”10.0.0.5″ csproduct >> c:\equipamentos.txt
+# Consulta de atualizações do Windows
+wmic qfe get hotfixid
+# Podemos varia-lo para buscar uma atualização especifica em uma máquina
+wmic /node:”10.0.0.5″ qfe | find “4012212”
+# Consultar programa instalado em um computador e removê-lo
+# Para tarefas onde temos que identificar se um determinado programa está instalado na máquina de forma rápida, podemos usar:
+wmic /node:”10.5.131.89″ product get name
+# Após listar os programas instalados podemos enviar um comando para desinstalar
+wmic /NODE:”gna-d-25-01″ product where name=”nome_do_programa” call uninstall
+# Ex: wmic /NODE:”gna-d-25-01″ product where name=”LibreOffice 4.2.2.1″ call uninstall
